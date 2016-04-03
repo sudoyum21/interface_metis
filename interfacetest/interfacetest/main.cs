@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
+using System.Xml.Linq;
 
 namespace Metis_Interface
 {
@@ -30,8 +30,8 @@ namespace Metis_Interface
         static private List<TextBox> joystickList = new List<TextBox>();
         static private List<TextBox> AllTextBoxList = new List<TextBox>();
 
-        static protected XmlDocument conf;
-        static protected XmlDocument perfajust;
+        static protected string ConfigXML = "Configuration";
+        static protected string PerfAjustXML = "PerformanceAjustment";
 
         //number of col in tabpage2
         static private int numbColumn = 4;
@@ -43,20 +43,20 @@ namespace Metis_Interface
 
         private void InitializeAll()
         {
-            string[] device_name = { "Compact", "RM", "Mom", "ASL Digital", "Analog", "Reachtime", "Sip N Pull/Digital", "PACMS" };
+            string[] device_name = { "Compact", "RM", "Mom", "ASL_Digital", "Analog", "Reachtime", "Sip_N_Pull/Digital", "PACMS" };
             string[] main_device_name = { "Display", "RMPJ" };
             string[] tilt_name = { "None", "Formula", "CG", "Conventional" };
             string[] legs_name = { "None", "Center Mount", "Dual Independent" };
             string[] rec_name = { "None", "Formula", "Conventional" };
             string[] elevate_name = { "None", "Beniste" };
-            string[] actuator_name = { "None", "4 Switch", "Multi-Activator", "SANODE" };
-            string[] misc_name = { "ECU 1/2", "ECU 3/4", "ACC1", "ACC2", "TNC", "ASL 528", "SM 1/2", "IR Module" };
+            string[] actuator_name = { "None", "4_Switch", "Multi-Activator", "SANODE" };
+            string[] misc_name = { "ECU_1/2", "ECU_3/4", "ACC1", "ACC2", "TNC", "ASL_528", "SM_1/2", "IR_Module" };
 
             string[] speed_name = { "speed", "response" };
-            string[] foward_name = { "Foward speed", "Foward Accel", "Foward Braking" };
-            string[] reverse_name = { "Reverse speed", "Reverse Accel", "Reverse Braking" };
-            string[] turn_name = { "Turn speed", "Turn Accel", "Turn Braking" };
-            string[] joystick_name = { "Tremor Dampening", "Power Level", "G Track Enable", "Torque", "Traction" };
+            string[] foward_name = { "Foward_speed", "Foward_Accel", "Foward_Braking" };
+            string[] reverse_name = { "Reverse_speed", "Reverse_Accel", "Reverse_Braking" };
+            string[] turn_name = { "Turn_speed", "Turn_Accel", "Turn_Braking" };
+            string[] joystick_name = { "Tremor_Dampening", "Power_Level", "G_Track_Enable", "Torque", "Traction" };
 
 
             InitializeComponent();
@@ -123,11 +123,9 @@ namespace Metis_Interface
                     TextBox textbox = new TextBox();
                     
                     textbox.Top = topPosition;
-                    
-                    if(column != 0)
-                        textbox.Name = name + column;
-                    else
-                        textbox.Name = name;
+
+                    textbox.Name = name + column;
+
                     textbox.Width = 40;
                     posX = textbox.Width +1;
                     textbox.Left = previousLeft + posX;
@@ -152,11 +150,15 @@ namespace Metis_Interface
             for (int i = 0; i < list.Count / numbColumn; i++)
             {
                 Label lbl = new Label();
-
                 lbl.Top = list[i].Top;
                 lbl.Left = Math.Abs(list[i].Left - 100);
+
+                if (list[i].Name[list[i].Name.Length - 1] != '0')
+                    lbl.Text = list[i].Name;
+                else
+                    lbl.Text = list[i].Name.Remove(list[i].Name.Length - 1);
+                    
                 lbl.Name = list[i].Name;
-                lbl.Text = list[i].Name;
                 box.Controls.Add(lbl);
             }
         }
@@ -179,29 +181,54 @@ namespace Metis_Interface
             }
         }
 
-        //XML create or overwrite
-        private Boolean writeXML(string name)
-        {
-            XmlDocument doc = new XmlDocument();
-            XmlElement el = (XmlElement)doc.AppendChild(doc.CreateElement("Foo"));
-            el.SetAttribute("Bar", "some & value");
-            el.AppendChild(doc.CreateElement("Nested")).InnerText = "data";
-            Console.WriteLine(doc.OuterXml);
-            return true;
-        }
-
         private void sauvegardebtnpage2_Click(object sender, EventArgs e)
         {
             int parsedValue = 0;
+            var root = new XElement("Root","");
+            var childSpeed = new XElement("Speed", "");
+            var childFoward = new XElement("Foward", "");
+            var childReverse = new XElement("Reverse", "");
+            var childTurn = new XElement("Turn", "");
+            var childJoystick = new XElement("Joystick", "");
+
             for (int pos = 0; pos < AllTextBoxList.Count; pos++)
             {
+
                 TextBox txt = AllTextBoxList[pos];
                 if (int.TryParse(txt.Text, out parsedValue))
                 {
-                    MessageBox.Show("For "+txt.Name+" value is "  + txt.Text);
-                    writeXML("gg");
+                        string temp = txt.Name.Trim();
+                        MessageBox.Show("For " + temp + " value is " + txt.Text + "and parent is " + txt.Parent.Name);
+
+                        switch (txt.Parent.Name)
+                        { 
+                            case "speedbox":
+                                //childSpeed.Add(txt.Name);
+                                childSpeed.SetElementValue(txt.Name, txt.Text.ToString());
+                                break;
+                            case "fowardbox":
+                                //childFoward.Add(txt.Name);
+                                childFoward.SetElementValue(txt.Name, txt.Text.ToString());
+                                break;
+                            case "reversebox":
+                                //childReverse.Add(txt.Name);
+                                childReverse.SetElementValue(txt.Name, txt.Text.ToString());
+                                break;
+                            case "turnbox":
+                                //childTurn.Add(txt.Name);
+                                childTurn.SetElementValue(txt.Name, txt.Text.ToString());
+                                break;
+                            case "joystickbox":
+                                //childJoystick.Add(txt.Name);
+                                childJoystick.SetElementValue(txt.Name, txt.Text.ToString());
+                                break;
+
+                            default: break;
+                        }
                 }
             }
+            root.Add(childSpeed,childFoward,childReverse,childTurn,childJoystick);      
+            root.Save(PerfAjustXML); 
         }
     }
 }
