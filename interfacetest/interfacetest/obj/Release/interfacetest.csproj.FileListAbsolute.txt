@@ -12,6 +12,6 @@ C:\Users\john doe\Desktop\interface_metis\interfacetest\interfacetest\obj\Releas
 C:\Users\john doe\Desktop\interface_metis\interfacetest\interfacetest\bin\Release\interfacetest.exe
 C:\Users\john doe\Desktop\interface_metis\interfacetest\interfacetest\bin\Release\interfacetest.pdb
 C:\Users\john doe\Desktop\interface_metis\interfacetest\interfacetest\obj\Release\interfacetest.csprojResolveAssemblyReference.cache
-C:\Users\john doe\Desktop\interface_metis\interfacetest\interfacetest\obj\Release\interfacetest.main.resources
 C:\Users\john doe\Desktop\interface_metis\interfacetest\interfacetest\obj\Release\interfacetest.Properties.Resources.resources
 C:\Users\john doe\Desktop\interface_metis\interfacetest\interfacetest\obj\Release\interfacetest.csproj.GenerateResource.Cache
+C:\Users\john doe\Desktop\interface_metis\interfacetest\interfacetest\obj\Release\Metis_Interface.main.resources

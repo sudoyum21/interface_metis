@@ -184,7 +184,7 @@ namespace Metis_Interface
                 if (chk.Checked)
                 {
                         string temp = chk.Name.Trim();
-                        MessageBox.Show("For " + temp + " value is " + chk.Text + "and parent is " + chk.Parent.Name);
+                        MessageBox.Show("For " + temp + " value is " + chk.Text);
 
                         switch (chk.Parent.Name)
                         {
@@ -249,7 +249,7 @@ namespace Metis_Interface
                 if (int.TryParse(txt.Text, out parsedValue))
                 {
                         string temp = txt.Name.Trim();
-                        MessageBox.Show("For " + temp + " value is " + txt.Text + "and parent is " + txt.Parent.Name);
+                        MessageBox.Show("For " + temp + " value is " + txt.Text);
 
                         switch (txt.Parent.Name)
                         { 
