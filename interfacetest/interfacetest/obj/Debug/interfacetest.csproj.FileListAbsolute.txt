@@ -1,0 +1,11 @@
+C:\Users\john doe\Desktop\metis_interface\interfacetest\interfacetest\bin\Debug\interfacetest.exe.config
+C:\Users\john doe\Desktop\metis_interface\interfacetest\interfacetest\bin\Debug\interfacetest.exe
+C:\Users\john doe\Desktop\metis_interface\interfacetest\interfacetest\bin\Debug\interfacetest.pdb
+C:\Users\john doe\Desktop\metis_interface\interfacetest\interfacetest\obj\Debug\interfacetest.csprojResolveAssemblyReference.cache
+C:\Users\john doe\Desktop\metis_interface\interfacetest\interfacetest\obj\Debug\interfacetest.Form1.resources
+C:\Users\john doe\Desktop\metis_interface\interfacetest\interfacetest\obj\Debug\interfacetest.Properties.Resources.resources
+C:\Users\john doe\Desktop\metis_interface\interfacetest\interfacetest\obj\Debug\interfacetest.csproj.GenerateResource.Cache
+C:\Users\john doe\Desktop\metis_interface\interfacetest\interfacetest\obj\Debug\interfacetest.exe
+C:\Users\john doe\Desktop\metis_interface\interfacetest\interfacetest\obj\Debug\interfacetest.pdb
+C:\Users\john doe\Desktop\metis_interface\interfacetest\interfacetest\obj\Debug\interfacetest.FormPerf.resources
+C:\Users\john doe\Desktop\metis_interface\interfacetest\interfacetest\obj\Debug\interfacetest.main.resources
