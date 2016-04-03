@@ -43,14 +43,14 @@ namespace Metis_Interface
 
         private void InitializeAll()
         {
-            string[] device_name = { "Compact", "RM", "Mom", "ASL_Digital", "Analog", "Reachtime", "Sip_N_Pull/Digital", "PACMS" };
+            string[] device_name = { "Compact", "RM", "Mom", "ASL_Digital", "Analog", "Reachtime", "Sip_N_Pull_Digital", "PACMS" };
             string[] main_device_name = { "Display", "RMPJ" };
             string[] tilt_name = { "None", "Formula", "CG", "Conventional" };
             string[] legs_name = { "None", "Center Mount", "Dual Independent" };
             string[] rec_name = { "None", "Formula", "Conventional" };
             string[] elevate_name = { "None", "Beniste" };
             string[] actuator_name = { "None", "4_Switch", "Multi-Activator", "SANODE" };
-            string[] misc_name = { "ECU_1/2", "ECU_3/4", "ACC1", "ACC2", "TNC", "ASL_528", "SM_1/2", "IR_Module" };
+            string[] misc_name = { "ECU_1_2", "ECU_3_4", "ACC1", "ACC2", "TNC", "ASL_528", "SM_1_2", "IR_Module" };
 
             string[] speed_name = { "speed", "response" };
             string[] foward_name = { "Foward_speed", "Foward_Accel", "Foward_Braking" };
@@ -163,23 +163,74 @@ namespace Metis_Interface
             }
         }
 
-        private void sauvegarde_Click(object sender, EventArgs e)
-        {
-            foreach (CheckBox chk in AllCheckBoxList)
-            {
-                if(chk.Checked)
-                    MessageBox.Show(chk.Name);
-            }
-        }
-
         private void sauvegardebtnpage1_Click(object sender, EventArgs e)
         {
-            foreach (CheckBox chk in AllCheckBoxList)
+
+            int parsedValue = 0;
+            var root = new XElement("Root","");
+            var Main_DeviceBox = new XElement("Main_DeviceBox", "");
+            var inputDeviceBox = new XElement("inputDeviceBox", "");
+            var ActuatorBox = new XElement("ActuatorBox", "");
+            var ReclineBox = new XElement("ReclineBox", "");
+            var LegsBox = new XElement("LegsBox", "");
+            var ElevateBox = new XElement("ElevateBox", "");
+            var TiltBox = new XElement("TiltBox", "");
+            var MiscallenousBox = new XElement("MiscallenousBox", "");
+
+            for (int pos = 0; pos < AllCheckBoxList.Count; pos++)
             {
+
+                CheckBox chk = AllCheckBoxList[pos];
                 if (chk.Checked)
-                    MessageBox.Show(chk.Name);
+                {
+                        string temp = chk.Name.Trim();
+                        MessageBox.Show("For " + temp + " value is " + chk.Text + "and parent is " + chk.Parent.Name);
+
+                        switch (chk.Parent.Name)
+                        {
+
+                            case "Main_DeviceBox":
+                                //childSpeed.Add(txt.Name);
+                                Main_DeviceBox.SetElementValue(chk.Name, chk.Checked.ToString());
+                                break;
+                            case "inputDeviceBox":
+                                //childFoward.Add(txt.Name);
+                                inputDeviceBox.SetElementValue(chk.Name, chk.Checked.ToString());
+                                break;
+                            case "ActuatorBox":
+                                //childReverse.Add(txt.Name);
+                                ActuatorBox.SetElementValue(chk.Name, chk.Checked.ToString());
+                                break;
+                            case "ReclineBox":
+                                //childTurn.Add(txt.Name);
+                                ReclineBox.SetElementValue(chk.Name, chk.Checked.ToString());
+                                break;
+                            case "LegsBox":
+                                //childJoystick.Add(txt.Name);
+                                LegsBox.SetElementValue(chk.Name, chk.Checked.ToString());
+                                break;
+                            case "ElevateBox":
+                                //childReverse.Add(txt.Name);
+                                ElevateBox.SetElementValue(chk.Name, chk.Checked.ToString());
+                                break;
+                            case "TiltBox":
+                                //childTurn.Add(txt.Name);
+                                TiltBox.SetElementValue(chk.Name, chk.Checked.ToString());
+                                break;
+                            case "MiscallenousBox":
+                                //childJoystick.Add(txt.Name);
+                                MiscallenousBox.SetElementValue(chk.Name, chk.Checked.ToString());
+                                break;
+
+                            default: break;
+                        }
+                }
             }
+            root.Add(Main_DeviceBox, inputDeviceBox, ActuatorBox, ReclineBox, LegsBox, ElevateBox, TiltBox, MiscallenousBox);      
+            root.Save(ConfigXML); 
         }
+
+        
 
         private void sauvegardebtnpage2_Click(object sender, EventArgs e)
         {
