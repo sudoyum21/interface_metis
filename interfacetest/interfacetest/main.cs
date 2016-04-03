@@ -7,38 +7,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
-namespace interfacetest
+namespace Metis_Interface
 {
     public partial class main : Form
     {
-        static public List<CheckBox> DeviceCheckBoxList = new List<CheckBox>();
-        static public List<CheckBox> MainCheckBoxList = new List<CheckBox>();
-        static public List<CheckBox> TiltCheckBoxList = new List<CheckBox>();
-        static public List<CheckBox> LegsCheckBoxList = new List<CheckBox>();
-        static public List<CheckBox> RecCheckBoxList = new List<CheckBox>();
-        static public List<CheckBox> ElevateCheckBoxList = new List<CheckBox>();
-        static public List<CheckBox> ActCheckBoxList = new List<CheckBox>();
-        static public List<CheckBox> MiscCheckBoxList = new List<CheckBox>();
-        static public List<CheckBox> AllCheckBoxList = new List<CheckBox>();
+        static private List<CheckBox> DeviceCheckBoxList = new List<CheckBox>();
+        static private List<CheckBox> MainCheckBoxList = new List<CheckBox>();
+        static private List<CheckBox> TiltCheckBoxList = new List<CheckBox>();
+        static private List<CheckBox> LegsCheckBoxList = new List<CheckBox>();
+        static private List<CheckBox> RecCheckBoxList = new List<CheckBox>();
+        static private List<CheckBox> ElevateCheckBoxList = new List<CheckBox>();
+        static private List<CheckBox> ActCheckBoxList = new List<CheckBox>();
+        static private List<CheckBox> MiscCheckBoxList = new List<CheckBox>();
+        static private List<CheckBox> AllCheckBoxList = new List<CheckBox>();
 
-        static public List<TextBox> speedList = new List<TextBox>();
-        static public List<TextBox> fowardList = new List<TextBox>();
-        static public List<TextBox> reverseList = new List<TextBox>();
-        static public List<TextBox> turnList = new List<TextBox>();
-        static public List<TextBox> joystickList = new List<TextBox>();
-        static public List<TextBox> AllTextBoxList = new List<TextBox>();
+        static private List<TextBox> speedList = new List<TextBox>();
+        static private List<TextBox> fowardList = new List<TextBox>();
+        static private List<TextBox> reverseList = new List<TextBox>();
+        static private List<TextBox> turnList = new List<TextBox>();
+        static private List<TextBox> joystickList = new List<TextBox>();
+        static private List<TextBox> AllTextBoxList = new List<TextBox>();
+
+        static protected XmlDocument conf;
+        static protected XmlDocument perfajust;
+
+        //number of col in tabpage2
+        static private int numbColumn = 4;
 
         public main()
+        {  
+            InitializeAll();
+        }
+
+        private void InitializeAll()
         {
-           
             string[] device_name = { "Compact", "RM", "Mom", "ASL Digital", "Analog", "Reachtime", "Sip N Pull/Digital", "PACMS" };
             string[] main_device_name = { "Display", "RMPJ" };
             string[] tilt_name = { "None", "Formula", "CG", "Conventional" };
             string[] legs_name = { "None", "Center Mount", "Dual Independent" };
             string[] rec_name = { "None", "Formula", "Conventional" };
             string[] elevate_name = { "None", "Beniste" };
-            string[] actuator_name = { "None", "4 Switch", "Multi-Activator","SANODE" };
+            string[] actuator_name = { "None", "4 Switch", "Multi-Activator", "SANODE" };
             string[] misc_name = { "ECU 1/2", "ECU 3/4", "ACC1", "ACC2", "TNC", "ASL 528", "SM 1/2", "IR Module" };
 
             string[] speed_name = { "speed", "response" };
@@ -46,7 +57,8 @@ namespace interfacetest
             string[] reverse_name = { "Reverse speed", "Reverse Accel", "Reverse Braking" };
             string[] turn_name = { "Turn speed", "Turn Accel", "Turn Braking" };
             string[] joystick_name = { "Tremor Dampening", "Power Level", "G Track Enable", "Torque", "Traction" };
-           
+
+
             InitializeComponent();
 
             InitializeCheckBoxList(Main_DeviceBox, MainCheckBoxList, main_device_name);
@@ -69,6 +81,8 @@ namespace interfacetest
             InitializeLabel(reversebox, reverseList);
             InitializeLabel(turnbox, turnList);
             InitializeLabel(joystick, joystickList);
+
+
         }
 
         void InitializeCheckBoxList(GroupBox box, List<CheckBox> list, string[] listname)
@@ -95,28 +109,47 @@ namespace interfacetest
 
         void InitializeTextBoxList(GroupBox box, List<TextBox> list, string[] listname)
         {
-            int topPosition = 30;
+            int topValue = 25;
+            int topPosition = topValue;
+            int posX = 0;
+            int column = 0;
+            
+            int previousLeft = box.Left+50;
+            int previousRight = box.Right;
+            while(numbColumn>column)
+            { 
+                foreach (string name in listname)
+                {
+                    TextBox textbox = new TextBox();
+                    
+                    textbox.Top = topPosition;
+                    
+                    if(column != 0)
+                        textbox.Name = name + column;
+                    else
+                        textbox.Name = name;
+                    textbox.Width = 40;
+                    posX = textbox.Width +1;
+                    textbox.Left = previousLeft + posX;
 
-            foreach (string name in listname)
-            {
-                TextBox textbox = new TextBox();
+                    topPosition += topValue;
 
-                textbox.Top = topPosition;
-                textbox.Left = 150;
-                textbox.Name = name;
-                textbox.Width = 40;
+                    box.Controls.Add(textbox);
 
-                topPosition += 25;
+                    list.Add(textbox);
+                    AllTextBoxList.Add(textbox);
 
-                box.Controls.Add(textbox);
-
-                list.Add(textbox);
-                AllTextBoxList.Add(textbox);
+                    previousRight = textbox.Right;
+                
+                }
+                previousLeft = previousRight + posX;
+                topPosition = topValue;
+                column++;
             }
         }
         void InitializeLabel(GroupBox box, List<TextBox> list)
         {
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < list.Count / numbColumn; i++)
             {
                 Label lbl = new Label();
 
@@ -146,13 +179,28 @@ namespace interfacetest
             }
         }
 
+        //XML create or overwrite
+        private Boolean writeXML(string name)
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlElement el = (XmlElement)doc.AppendChild(doc.CreateElement("Foo"));
+            el.SetAttribute("Bar", "some & value");
+            el.AppendChild(doc.CreateElement("Nested")).InnerText = "data";
+            Console.WriteLine(doc.OuterXml);
+            return true;
+        }
+
         private void sauvegardebtnpage2_Click(object sender, EventArgs e)
         {
             int parsedValue = 0;
-            foreach (TextBox txt in AllTextBoxList)
+            for (int pos = 0; pos < AllTextBoxList.Count; pos++)
             {
+                TextBox txt = AllTextBoxList[pos];
                 if (int.TryParse(txt.Text, out parsedValue))
-                    MessageBox.Show(txt.Text);
+                {
+                    MessageBox.Show("For "+txt.Name+" value is "  + txt.Text);
+                    writeXML("gg");
+                }
             }
         }
     }
