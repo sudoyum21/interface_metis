@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Metis_Interface
 {
@@ -84,7 +85,7 @@ namespace Metis_Interface
 
 
         }
-
+        //initialisation de tous les checkbox dans page 1
         void InitializeCheckBoxList(GroupBox box, List<CheckBox> list, string[] listname)
         {
             int topPosition = 30;
@@ -106,7 +107,7 @@ namespace Metis_Interface
                 AllCheckBoxList.Add(checkBox);
             }
         }
-
+        //initialisation de tous les textbox dans page 2
         void InitializeTextBoxList(GroupBox box, List<TextBox> list, string[] listname)
         {
             int topValue = 25;
@@ -131,6 +132,9 @@ namespace Metis_Interface
                     textbox.Left = previousLeft + posX;
 
                     topPosition += topValue;
+               
+                  
+                    textbox.Click += new EventHandler(this.ClearColorOnClick);
 
                     box.Controls.Add(textbox);
 
@@ -145,6 +149,13 @@ namespace Metis_Interface
                 column++;
             }
         }
+        //Clear le background color 
+        private void ClearColorOnClick(object sender, EventArgs e)
+        {
+            TextBox txt = sender as TextBox;
+            txt.BackColor = Color.White;
+        }
+        //intialisation de tous les noms des textbox dans page 2
         void InitializeLabel(GroupBox box, List<TextBox> list)
         {
             for (int i = 0; i < list.Count / numbColumn; i++)
@@ -162,11 +173,10 @@ namespace Metis_Interface
                 box.Controls.Add(lbl);
             }
         }
-
+        //handler du click save de page 1
         private void sauvegardebtnpage1_Click(object sender, EventArgs e)
         {
 
-            int parsedValue = 0;
             var root = new XElement("Root","");
             var Main_DeviceBox = new XElement("Main_DeviceBox", "");
             var inputDeviceBox = new XElement("inputDeviceBox", "");
@@ -231,7 +241,7 @@ namespace Metis_Interface
         }
 
         
-
+        //handler du click save de page 2
         private void sauvegardebtnpage2_Click(object sender, EventArgs e)
         {
             int parsedValue = 0;
@@ -246,13 +256,15 @@ namespace Metis_Interface
             {
 
                 TextBox txt = AllTextBoxList[pos];
-                if (int.TryParse(txt.Text, out parsedValue))
+                if (int.TryParse(txt.Text, out parsedValue) && Convert.ToDouble (txt.Text) <= 100  && Convert.ToDouble(txt.Text) >= 0)
                 {
+        
+                    {
                         string temp = txt.Name.Trim();
                         MessageBox.Show("For " + temp + " value is " + txt.Text);
 
                         switch (txt.Parent.Name)
-                        { 
+                        {
                             case "speedbox":
                                 //childSpeed.Add(txt.Name);
                                 childSpeed.SetElementValue(txt.Name, txt.Text.ToString());
@@ -276,11 +288,48 @@ namespace Metis_Interface
 
                             default: break;
                         }
+                    }
+                   
+                }
+                else
+                {
+                    txt.Text = "";
+                    txt.BackColor = Color.Red;
                 }
             }
-            root.Add(childSpeed,childFoward,childReverse,childTurn,childJoystick);      
+            root.Add(childSpeed,childFoward,childReverse,childTurn,childJoystick);
             root.Save(PerfAjustXML); 
+
         }
+
+    }
+
+    public class X509
+    {
+
+        public static void cert_main()
+        {
+
+            // The path to the certificate.
+            string Certificate = "sitem.cer";
+
+            // Load the certificate into an X509Certificate object.
+            X509Certificate cert = new X509Certificate(Certificate);
+
+            // Get the value.
+            string resultsTrue = cert.ToString(true);
+
+            // Display the value to the console.
+            Console.WriteLine(resultsTrue);
+
+            // Get the value.
+            string resultsFalse = cert.ToString(false);
+
+            // Display the value to the console.
+            Console.WriteLine(resultsFalse);
+
+        }
+
     }
 }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(main));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ActuatorBox = new System.Windows.Forms.GroupBox();
@@ -63,6 +64,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.tabPage1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabPage1.BackgroundImage")));
+            this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.tabPage1.Controls.Add(this.ActuatorBox);
             this.tabPage1.Controls.Add(this.ReclineBox);
             this.tabPage1.Controls.Add(this.LegsBox);
@@ -78,7 +82,6 @@
             this.tabPage1.Size = new System.Drawing.Size(834, 690);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Configuration";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // ActuatorBox
             // 
@@ -97,13 +100,12 @@
             this.ReclineBox.TabIndex = 11;
             this.ReclineBox.TabStop = false;
             this.ReclineBox.Text = "Recline";
-     
             // 
             // LegsBox
             // 
-            this.LegsBox.Location = new System.Drawing.Point(288, 159);
+            this.LegsBox.Location = new System.Drawing.Point(288, 127);
             this.LegsBox.Name = "LegsBox";
-            this.LegsBox.Size = new System.Drawing.Size(140, 109);
+            this.LegsBox.Size = new System.Drawing.Size(122, 123);
             this.LegsBox.TabIndex = 10;
             this.LegsBox.TabStop = false;
             this.LegsBox.Text = "Legs";
@@ -119,9 +121,9 @@
             // 
             // ElevateBox
             // 
-            this.ElevateBox.Location = new System.Drawing.Point(447, 159);
+            this.ElevateBox.Location = new System.Drawing.Point(447, 127);
             this.ElevateBox.Name = "ElevateBox";
-            this.ElevateBox.Size = new System.Drawing.Size(140, 109);
+            this.ElevateBox.Size = new System.Drawing.Size(140, 98);
             this.ElevateBox.TabIndex = 12;
             this.ElevateBox.TabStop = false;
             this.ElevateBox.Text = "Elevate";
@@ -137,16 +139,16 @@
             // 
             // MiscallenousBox
             // 
-            this.MiscallenousBox.Location = new System.Drawing.Point(603, 230);
+            this.MiscallenousBox.Location = new System.Drawing.Point(630, 230);
             this.MiscallenousBox.Name = "MiscallenousBox";
-            this.MiscallenousBox.Size = new System.Drawing.Size(251, 267);
+            this.MiscallenousBox.Size = new System.Drawing.Size(224, 267);
             this.MiscallenousBox.TabIndex = 9;
             this.MiscallenousBox.TabStop = false;
             this.MiscallenousBox.Text = "Miscallenous";
             // 
             // sauvegardebtnpage1
             // 
-            this.sauvegardebtnpage1.Location = new System.Drawing.Point(609, 503);
+            this.sauvegardebtnpage1.Location = new System.Drawing.Point(630, 532);
             this.sauvegardebtnpage1.Name = "sauvegardebtnpage1";
             this.sauvegardebtnpage1.Size = new System.Drawing.Size(75, 23);
             this.sauvegardebtnpage1.TabIndex = 9;
@@ -158,13 +160,14 @@
             // 
             this.inputDeviceBox.Location = new System.Drawing.Point(59, 159);
             this.inputDeviceBox.Name = "inputDeviceBox";
-            this.inputDeviceBox.Size = new System.Drawing.Size(206, 296);
+            this.inputDeviceBox.Size = new System.Drawing.Size(154, 296);
             this.inputDeviceBox.TabIndex = 8;
             this.inputDeviceBox.TabStop = false;
             this.inputDeviceBox.Text = "Input Device";
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.LightSteelBlue;
             this.tabPage2.Controls.Add(this.sauvegardebtnpage2);
             this.tabPage2.Controls.Add(this.fowardbox);
             this.tabPage2.Controls.Add(this.reversebox);
@@ -177,7 +180,6 @@
             this.tabPage2.Size = new System.Drawing.Size(834, 690);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Performance Ajustement";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // sauvegardebtnpage2
             // 
@@ -219,7 +221,7 @@
             // joystick
             // 
             this.joystick.Location = new System.Drawing.Point(49, 497);
-            this.joystick.Name = "joystickbox";
+            this.joystick.Name = "joystick";
             this.joystick.Size = new System.Drawing.Size(727, 164);
             this.joystick.TabIndex = 2;
             this.joystick.TabStop = false;
@@ -232,12 +234,13 @@
             this.speedbox.Size = new System.Drawing.Size(727, 86);
             this.speedbox.TabIndex = 0;
             this.speedbox.TabStop = false;
+            
             // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(866, 741);
+            this.ClientSize = new System.Drawing.Size(866, 733);
             this.Controls.Add(this.tabControl1);
             this.Name = "main";
             this.Text = "Configuration";
@@ -271,4 +274,6 @@
         private System.Windows.Forms.Button sauvegardebtnpage2;
 
     }
+
+    
 }

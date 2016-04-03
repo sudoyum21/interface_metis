@@ -1,0 +1,3 @@
+<Foo Bar="some &amp; value">
+  <Nested>data</Nested>
+</Foo>

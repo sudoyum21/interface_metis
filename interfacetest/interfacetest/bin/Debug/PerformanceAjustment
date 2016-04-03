@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Speed>
+    <speed0>10</speed0>
+  </Speed>
+  <Foward></Foward>
+  <Reverse></Reverse>
+  <Turn></Turn>
+  <Joystick></Joystick>
+</Root>

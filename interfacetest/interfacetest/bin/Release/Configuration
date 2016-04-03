@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Main_DeviceBox></Main_DeviceBox>
+  <inputDeviceBox></inputDeviceBox>
+  <ActuatorBox>
+    <SANODE>True</SANODE>
+  </ActuatorBox>
+  <ReclineBox></ReclineBox>
+  <LegsBox></LegsBox>
+  <ElevateBox></ElevateBox>
+  <TiltBox>
+    <None>True</None>
+    <CG>True</CG>
+  </TiltBox>
+  <MiscallenousBox>
+    <ECU_1_2>True</ECU_1_2>
+  </MiscallenousBox>
+</Root>
