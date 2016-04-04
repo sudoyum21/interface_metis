@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Root>
-  <Speed>
-    <speed0>10</speed0>
-  </Speed>
-  <Foward></Foward>
-  <Reverse></Reverse>
-  <Turn></Turn>
-  <Joystick></Joystick>
-</Root>
+<root>
+  <speedbox />
+  <fowardbox>
+    <Foward_speed0>55</Foward_speed0>
+    <Foward_Accel0>66</Foward_Accel0>
+  </fowardbox>
+  <reversebox>
+    <Reverse_Braking1>88</Reverse_Braking1>
+  </reversebox>
+  <turnbox />
+  <joystickbox />
+</root>

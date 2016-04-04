@@ -1,19 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Root>
-  <Main_DeviceBox>
-    <Display>True</Display>
-    <RMPJ>True</RMPJ>
-  </Main_DeviceBox>
-  <inputDeviceBox>
-    <ASL_Digital>True</ASL_Digital>
-    <Sip_N_Pull_Digital>True</Sip_N_Pull_Digital>
-  </inputDeviceBox>
-  <ActuatorBox></ActuatorBox>
-  <ReclineBox></ReclineBox>
-  <LegsBox></LegsBox>
-  <ElevateBox></ElevateBox>
-  <TiltBox></TiltBox>
+<root>
+  <inputDeviceBox />
   <MiscallenousBox>
+    <TNC>True</TNC>
+    <ASL_528>True</ASL_528>
     <SM_1_2>True</SM_1_2>
   </MiscallenousBox>
-</Root>
+  <TiltBox />
+  <ElevateBox />
+  <Main_DeviceBox />
+  <LegsBox />
+  <ReclineBox />
+  <ActuatorBox />
+</root>

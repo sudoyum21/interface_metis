@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Security.Cryptography.X509Certificates;
 
+
 namespace Metis_Interface
 {
     public partial class main : Form
@@ -30,6 +31,9 @@ namespace Metis_Interface
         static private List<TextBox> turnList = new List<TextBox>();
         static private List<TextBox> joystickList = new List<TextBox>();
         static private List<TextBox> AllTextBoxList = new List<TextBox>();
+
+        static private List<XElement> XEl1 = new List<XElement>();
+        static private List<XElement> XEl2 = new List<XElement>();
 
         static protected string ConfigXML = "Configuration";
         static protected string PerfAjustXML = "PerformanceAjustment";
@@ -59,6 +63,8 @@ namespace Metis_Interface
             string[] turn_name = { "Turn_speed", "Turn_Accel", "Turn_Braking" };
             string[] joystick_name = { "Tremor_Dampening", "Power_Level", "G_Track_Enable", "Torque", "Traction" };
 
+            string[] element2 = { "root", "speedbox", "fowardbox", "reversebox", "turnbox", "joystickbox" };
+            string[] element1 = { "root", "inputDeviceBox", "MiscallenousBox", "TiltBox", "ElevateBox", "Main_DeviceBox", "LegsBox", "ReclineBox", "ActuatorBox" };
 
             InitializeComponent();
 
@@ -82,6 +88,19 @@ namespace Metis_Interface
             InitializeLabel(reversebox, reverseList);
             InitializeLabel(turnbox, turnList);
             InitializeLabel(joystick, joystickList);
+
+            
+
+            for (int i = 0; i < element1.Length; i++)
+            {
+                XElement temp1 = new XElement(element1[i]);
+                XEl1.Add(temp1);
+            }
+            for (int i = 0; i < element2.Length; i++)
+            {
+                XElement temp2 = new XElement(element2[i]);
+                XEl2.Add(temp2);
+            }
 
 
         }
@@ -149,6 +168,7 @@ namespace Metis_Interface
                 column++;
             }
         }
+
         //Clear le background color 
         private void ClearColorOnClick(object sender, EventArgs e)
         {
@@ -176,17 +196,6 @@ namespace Metis_Interface
         //handler du click save de page 1
         private void sauvegardebtnpage1_Click(object sender, EventArgs e)
         {
-
-            var root = new XElement("Root","");
-            var Main_DeviceBox = new XElement("Main_DeviceBox", "");
-            var inputDeviceBox = new XElement("inputDeviceBox", "");
-            var ActuatorBox = new XElement("ActuatorBox", "");
-            var ReclineBox = new XElement("ReclineBox", "");
-            var LegsBox = new XElement("LegsBox", "");
-            var ElevateBox = new XElement("ElevateBox", "");
-            var TiltBox = new XElement("TiltBox", "");
-            var MiscallenousBox = new XElement("MiscallenousBox", "");
-
             for (int pos = 0; pos < AllCheckBoxList.Count; pos++)
             {
 
@@ -194,50 +203,21 @@ namespace Metis_Interface
                 if (chk.Checked)
                 {
                         string temp = chk.Name.Trim();
-                        MessageBox.Show("For " + temp + " value is " + chk.Text);
-
-                        switch (chk.Parent.Name)
+                        //MessageBox.Show("For " + temp + " value is " + chk.Text);
+                        for (int i = 1; i < XEl1.Count; i++)
                         {
-
-                            case "Main_DeviceBox":
-                                //childSpeed.Add(txt.Name);
-                                Main_DeviceBox.SetElementValue(chk.Name, chk.Checked.ToString());
-                                break;
-                            case "inputDeviceBox":
-                                //childFoward.Add(txt.Name);
-                                inputDeviceBox.SetElementValue(chk.Name, chk.Checked.ToString());
-                                break;
-                            case "ActuatorBox":
-                                //childReverse.Add(txt.Name);
-                                ActuatorBox.SetElementValue(chk.Name, chk.Checked.ToString());
-                                break;
-                            case "ReclineBox":
-                                //childTurn.Add(txt.Name);
-                                ReclineBox.SetElementValue(chk.Name, chk.Checked.ToString());
-                                break;
-                            case "LegsBox":
-                                //childJoystick.Add(txt.Name);
-                                LegsBox.SetElementValue(chk.Name, chk.Checked.ToString());
-                                break;
-                            case "ElevateBox":
-                                //childReverse.Add(txt.Name);
-                                ElevateBox.SetElementValue(chk.Name, chk.Checked.ToString());
-                                break;
-                            case "TiltBox":
-                                //childTurn.Add(txt.Name);
-                                TiltBox.SetElementValue(chk.Name, chk.Checked.ToString());
-                                break;
-                            case "MiscallenousBox":
-                                //childJoystick.Add(txt.Name);
-                                MiscallenousBox.SetElementValue(chk.Name, chk.Checked.ToString());
-                                break;
-
-                            default: break;
+                            if (chk.Parent.Name == XEl1[i].Name)
+                            {
+                                XEl1[i].SetElementValue(chk.Name, chk.Checked.ToString());
+                            }
                         }
                 }
             }
-            root.Add(Main_DeviceBox, inputDeviceBox, ActuatorBox, ReclineBox, LegsBox, ElevateBox, TiltBox, MiscallenousBox);      
-            root.Save(ConfigXML); 
+            for (int i = 1; i < XEl1.Count; i++)
+            {
+                XEl1[0].Add(XEl1[i]);
+            } 
+            XEl1[0].Save(ConfigXML); 
         }
 
         
@@ -245,48 +225,20 @@ namespace Metis_Interface
         private void sauvegardebtnpage2_Click(object sender, EventArgs e)
         {
             int parsedValue = 0;
-            var root = new XElement("Root","");
-            var childSpeed = new XElement("Speed", "");
-            var childFoward = new XElement("Foward", "");
-            var childReverse = new XElement("Reverse", "");
-            var childTurn = new XElement("Turn", "");
-            var childJoystick = new XElement("Joystick", "");
-
             for (int pos = 0; pos < AllTextBoxList.Count; pos++)
             {
-
                 TextBox txt = AllTextBoxList[pos];
                 if (int.TryParse(txt.Text, out parsedValue) && Convert.ToDouble (txt.Text) <= 100  && Convert.ToDouble(txt.Text) >= 0)
                 {
-        
                     {
                         string temp = txt.Name.Trim();
-                        MessageBox.Show("For " + temp + " value is " + txt.Text);
-
-                        switch (txt.Parent.Name)
+                        //MessageBox.Show("For " + temp + " value is " + txt.Text);
+                        for(int i = 1 ; i < XEl2.Count; i++)
                         {
-                            case "speedbox":
-                                //childSpeed.Add(txt.Name);
-                                childSpeed.SetElementValue(txt.Name, txt.Text.ToString());
-                                break;
-                            case "fowardbox":
-                                //childFoward.Add(txt.Name);
-                                childFoward.SetElementValue(txt.Name, txt.Text.ToString());
-                                break;
-                            case "reversebox":
-                                //childReverse.Add(txt.Name);
-                                childReverse.SetElementValue(txt.Name, txt.Text.ToString());
-                                break;
-                            case "turnbox":
-                                //childTurn.Add(txt.Name);
-                                childTurn.SetElementValue(txt.Name, txt.Text.ToString());
-                                break;
-                            case "joystickbox":
-                                //childJoystick.Add(txt.Name);
-                                childJoystick.SetElementValue(txt.Name, txt.Text.ToString());
-                                break;
-
-                            default: break;
+                            if (txt.Parent.Name == XEl2[i].Name)
+                            {
+                                XEl2[i].SetElementValue(txt.Name, txt.Text.ToString());
+                            }
                         }
                     }
                    
@@ -297,9 +249,11 @@ namespace Metis_Interface
                     txt.BackColor = Color.Red;
                 }
             }
-            root.Add(childSpeed,childFoward,childReverse,childTurn,childJoystick);
-            root.Save(PerfAjustXML); 
-
+            for (int i = 1; i < XEl2.Count; i++)
+            {
+                XEl2[0].Add(XEl2[i]);
+            }
+            XEl2[0].Save(PerfAjustXML); 
         }
 
     }
