@@ -38,6 +38,10 @@ namespace Metis_Interface
         static protected string ConfigXML = "Configuration";
         static protected string PerfAjustXML = "PerformanceAjustment";
 
+        static protected string[] element2 = { "root", "speedbox", "fowardbox", "reversebox", "turnbox", "joystickbox" };
+        static protected string[] element1 = { "root", "inputDeviceBox", "MiscallenousBox", "TiltBox", "ElevateBox", "Main_DeviceBox", "LegsBox", "ReclineBox", "ActuatorBox" };
+
+
         //number of col in tabpage2
         static private int numbColumn = 4;
 
@@ -51,7 +55,7 @@ namespace Metis_Interface
             string[] device_name = { "Compact", "RM", "Mom", "ASL_Digital", "Analog", "Reachtime", "Sip_N_Pull_Digital", "PACMS" };
             string[] main_device_name = { "Display", "RMPJ" };
             string[] tilt_name = { "None", "Formula", "CG", "Conventional" };
-            string[] legs_name = { "None", "Center Mount", "Dual Independent" };
+            string[] legs_name = { "None", "Center_Mount", "Dual_Independent" };
             string[] rec_name = { "None", "Formula", "Conventional" };
             string[] elevate_name = { "None", "Beniste" };
             string[] actuator_name = { "None", "4_Switch", "Multi-Activator", "SANODE" };
@@ -63,9 +67,7 @@ namespace Metis_Interface
             string[] turn_name = { "Turn_speed", "Turn_Accel", "Turn_Braking" };
             string[] joystick_name = { "Tremor_Dampening", "Power_Level", "G_Track_Enable", "Torque", "Traction" };
 
-            string[] element2 = { "root", "speedbox", "fowardbox", "reversebox", "turnbox", "joystickbox" };
-            string[] element1 = { "root", "inputDeviceBox", "MiscallenousBox", "TiltBox", "ElevateBox", "Main_DeviceBox", "LegsBox", "ReclineBox", "ActuatorBox" };
-
+            
             InitializeComponent();
 
             InitializeCheckBoxList(Main_DeviceBox, MainCheckBoxList, main_device_name);
@@ -92,7 +94,7 @@ namespace Metis_Interface
             
 
             for (int i = 0; i < element1.Length; i++)
-            {
+            {       
                 XElement temp1 = new XElement(element1[i]);
                 XEl1.Add(temp1);
             }
@@ -217,8 +219,11 @@ namespace Metis_Interface
             {
                 XEl1[0].Add(XEl1[i]);
             } 
-            XEl1[0].Save(ConfigXML); 
+
+            XEl1[0].Save(ConfigXML);
+            ClearAndResetXML(XEl1, element1);
         }
+
 
         
         //handler du click save de page 2
@@ -253,7 +258,36 @@ namespace Metis_Interface
             {
                 XEl2[0].Add(XEl2[i]);
             }
-            XEl2[0].Save(PerfAjustXML); 
+            XEl2[0].Save(PerfAjustXML);
+            ClearAndResetXML(XEl2, element2);
+        }
+
+        private void ClearAndResetXML(List<XElement> XEl, string [] element)
+        {
+            XEl.Clear();
+
+            for (int i = 0; i < element.Length; i++)
+            {
+                XElement temp1 = new XElement(element[i]);
+                XEl.Add(temp1);
+            }
+        }
+
+        private void Clear1_Click(object sender, EventArgs e)
+        {
+            foreach (CheckBox box in AllCheckBoxList)
+            {
+                box.Checked = false;
+            }
+        }
+
+        private void Clear2_Click(object sender, EventArgs e)
+        {
+            foreach (TextBox txt in AllTextBoxList)
+            {
+                txt.Text = "";
+                txt.BackColor = Color.White;
+            }
         }
 
     }

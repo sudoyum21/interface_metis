@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <inputDeviceBox />
-  <MiscallenousBox>
-    <TNC>True</TNC>
-    <ASL_528>True</ASL_528>
-    <SM_1_2>True</SM_1_2>
-  </MiscallenousBox>
+  <MiscallenousBox />
   <TiltBox />
-  <ElevateBox />
+  <ElevateBox>
+    <None>True</None>
+    <Beniste>True</Beniste>
+  </ElevateBox>
   <Main_DeviceBox />
-  <LegsBox />
+  <LegsBox>
+    <Dual_Independent>True</Dual_Independent>
+  </LegsBox>
   <ReclineBox />
   <ActuatorBox />
 </root>

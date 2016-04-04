@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(main));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.Clear1 = new System.Windows.Forms.Button();
             this.ActuatorBox = new System.Windows.Forms.GroupBox();
             this.ReclineBox = new System.Windows.Forms.GroupBox();
             this.LegsBox = new System.Windows.Forms.GroupBox();
@@ -47,6 +48,7 @@
             this.turnbox = new System.Windows.Forms.GroupBox();
             this.joystick = new System.Windows.Forms.GroupBox();
             this.speedbox = new System.Windows.Forms.GroupBox();
+            this.Clear2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -67,6 +69,7 @@
             this.tabPage1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.tabPage1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabPage1.BackgroundImage")));
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.tabPage1.Controls.Add(this.Clear1);
             this.tabPage1.Controls.Add(this.ActuatorBox);
             this.tabPage1.Controls.Add(this.ReclineBox);
             this.tabPage1.Controls.Add(this.LegsBox);
@@ -82,6 +85,16 @@
             this.tabPage1.Size = new System.Drawing.Size(834, 690);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Configuration";
+            // 
+            // Clear1
+            // 
+            this.Clear1.Location = new System.Drawing.Point(728, 532);
+            this.Clear1.Name = "Clear1";
+            this.Clear1.Size = new System.Drawing.Size(75, 23);
+            this.Clear1.TabIndex = 13;
+            this.Clear1.Text = "Clear";
+            this.Clear1.UseVisualStyleBackColor = true;
+            this.Clear1.Click += new System.EventHandler(this.Clear1_Click);
             // 
             // ActuatorBox
             // 
@@ -168,6 +181,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.tabPage2.Controls.Add(this.Clear2);
             this.tabPage2.Controls.Add(this.sauvegardebtnpage2);
             this.tabPage2.Controls.Add(this.fowardbox);
             this.tabPage2.Controls.Add(this.reversebox);
@@ -183,7 +197,7 @@
             // 
             // sauvegardebtnpage2
             // 
-            this.sauvegardebtnpage2.Location = new System.Drawing.Point(713, 465);
+            this.sauvegardebtnpage2.Location = new System.Drawing.Point(599, 468);
             this.sauvegardebtnpage2.Name = "sauvegardebtnpage2";
             this.sauvegardebtnpage2.Size = new System.Drawing.Size(96, 23);
             this.sauvegardebtnpage2.TabIndex = 4;
@@ -234,7 +248,16 @@
             this.speedbox.Size = new System.Drawing.Size(727, 86);
             this.speedbox.TabIndex = 0;
             this.speedbox.TabStop = false;
-            
+            // 
+            // Clear2
+            // 
+            this.Clear2.Location = new System.Drawing.Point(701, 468);
+            this.Clear2.Name = "Clear2";
+            this.Clear2.Size = new System.Drawing.Size(75, 23);
+            this.Clear2.TabIndex = 14;
+            this.Clear2.Text = "Clear";
+            this.Clear2.UseVisualStyleBackColor = true;
+            this.Clear2.Click += new System.EventHandler(this.Clear2_Click);
             // 
             // main
             // 
@@ -272,6 +295,8 @@
         private System.Windows.Forms.GroupBox turnbox;
         private System.Windows.Forms.GroupBox joystick;
         private System.Windows.Forms.Button sauvegardebtnpage2;
+        private System.Windows.Forms.Button Clear1;
+        private System.Windows.Forms.Button Clear2;
 
     }
 
