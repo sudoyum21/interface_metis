@@ -1,19 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Display>
-  <RMPJ />
-  <Compact />
-  <RM />
-  <Mom />
-  <ASL_Digital />
-  <Analog />
-  <Reachtime />
-  <Sip_N_Pull_Digital />
-  <RMPJ />
-  <Compact />
-  <RM />
-  <Mom />
-  <ASL_Digital />
-  <Analog />
-  <Reachtime />
-  <Sip_N_Pull_Digital />
-</Display>
+<root>
+  <inputDeviceBox>
+    <Compact>True</Compact>
+    <RM>True</RM>
+    <Mom>True</Mom>
+    <ASL_Digital>True</ASL_Digital>
+    <Analog>True</Analog>
+    <Reachtime>True</Reachtime>
+    <Sip_N_Pull_Digital>True</Sip_N_Pull_Digital>
+    <PACMS>True</PACMS>
+  </inputDeviceBox>
+  <MiscallenousBox>
+    <ECU_1_2>True</ECU_1_2>
+    <ECU_3_4>True</ECU_3_4>
+    <ACC1>True</ACC1>
+    <ACC2>True</ACC2>
+    <TNC>True</TNC>
+    <ASL_528>True</ASL_528>
+    <SM_1_2>True</SM_1_2>
+    <IR_Module>True</IR_Module>
+  </MiscallenousBox>
+  <TiltBox>
+    <None>True</None>
+    <Formula>True</Formula>
+    <CG>True</CG>
+  </TiltBox>
+  <ElevateBox>
+    <None>True</None>
+    <Beniste>True</Beniste>
+  </ElevateBox>
+  <Main_DeviceBox>
+    <Display>True</Display>
+    <RMPJ>True</RMPJ>
+  </Main_DeviceBox>
+  <LegsBox>
+    <None>True</None>
+    <Center_Mount>True</Center_Mount>
+    <Dual_Independent>True</Dual_Independent>
+  </LegsBox>
+  <ReclineBox>
+    <None>True</None>
+    <Formula>True</Formula>
+    <Conventional>True</Conventional>
+  </ReclineBox>
+  <ActuatorBox>
+    <None>True</None>
+    <four_Switch>True</four_Switch>
+    <Multi-Activator>True</Multi-Activator>
+    <SANODE>True</SANODE>
+  </ActuatorBox>
+</root>

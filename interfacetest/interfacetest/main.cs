@@ -58,7 +58,7 @@ namespace Metis_Interface
             string[] legs_name = { "None", "Center_Mount", "Dual_Independent" };
             string[] rec_name = { "None", "Formula", "Conventional" };
             string[] elevate_name = { "None", "Beniste" };
-            string[] actuator_name = { "None", "4_Switch", "Multi-Activator", "SANODE" };
+            string[] actuator_name = { "None", "four_Switch", "Multi-Activator", "SANODE" };
             string[] misc_name = { "ECU_1_2", "ECU_3_4", "ACC1", "ACC2", "TNC", "ASL_528", "SM_1_2", "IR_Module" };
 
             string[] speed_name = { "speed", "response" };

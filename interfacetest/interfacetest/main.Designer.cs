@@ -235,7 +235,7 @@
             // joystick
             // 
             this.joystick.Location = new System.Drawing.Point(49, 497);
-            this.joystick.Name = "joystick";
+            this.joystick.Name = "joystickbox";
             this.joystick.Size = new System.Drawing.Size(727, 164);
             this.joystick.TabIndex = 2;
             this.joystick.TabStop = false;
